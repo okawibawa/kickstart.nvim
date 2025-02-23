@@ -468,7 +468,10 @@ require('lazy').setup({
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'williamboman/mason.nvim', opts = {} },
+      {
+        'williamboman/mason.nvim',
+        opts = {},
+      },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -658,18 +661,33 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
+        -- Go
+        gopls = {},
+        golangci_lint_ls = {},
+
+        -- Python
+        pyright = {},
+        ruff = {},
+
+        -- Documentation/Markup
+        marksman = {},
+        jsonls = {},
+        yamlls = {},
+
+        -- Docker
+        dockerls = {},
+        docker_compose_language_service = {},
+
+        -- Database
+        sqls = {},
+
+        -- JS, TS, React Ecosystem
+        ts_ls = {},
+        eslint = {},
+        tailwindcss = {},
+        cssls = {},
+        html = {},
+        emmet_ls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -702,7 +720,21 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        'stylua',
+        'prettier',
+        'prettierd',
+        'eslint_d',
+        'gofumpt',
+        'goimports',
+        'golangci-lint',
+        'black',
+        'isort',
+        'ruff',
+        'shfmt',
+        'shellcheck',
+        'sqlfmt',
+        'yamlfmt',
+        'actionlint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -757,11 +789,9 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        python = { 'isort', 'black', 'ruff' },
+        javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
+        golang = { 'gofumpt', 'goimports', 'golangci_lint' },
       },
     },
   },
@@ -834,7 +864,9 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
@@ -908,6 +940,9 @@ require('lazy').setup({
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+
+  -- Comments code
+  { 'folke/ts-comments.nvim', opts = {}, event = 'VeryLazy', enabled = vim.fn.has 'nvim-0.10.0' == 1 },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
