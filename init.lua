@@ -159,6 +159,12 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Close current buffer
+vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Close current buffer' })
+
+-- Escape insert mode using `jk`
+vim.keymap.set('i', 'jk', '<ESC>', { noremap = true })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
