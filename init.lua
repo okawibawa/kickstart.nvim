@@ -84,6 +84,9 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- This setting somehow fixes error on Bun where it cannot find modules
+vim.opt.backupcopy = 'yes'
+
 vim.opt.termguicolors = true
 
 -- Set <space> as the leader key
