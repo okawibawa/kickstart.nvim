@@ -84,6 +84,8 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+vim.opt.termguicolors = true
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -103,6 +105,9 @@ vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -161,6 +166,10 @@ vim.opt.scrolloff = 10
 
 -- Close current buffer
 vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Close current buffer' })
+
+-- Navigate between buffers
+vim.keymap.set('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Previous buffer' })
 
 -- Escape insert mode using `jk`
 vim.keymap.set('i', 'jk', '<ESC>', { noremap = true })
@@ -689,7 +698,7 @@ require('lazy').setup({
 
         -- JS, TS, React Ecosystem
         ts_ls = {},
-        eslint = {},
+        eslint_d = {},
         tailwindcss = {},
         cssls = {},
         html = {},
@@ -741,6 +750,10 @@ require('lazy').setup({
         'sqlfmt',
         'yamlfmt',
         'actionlint',
+        'markdownlint',
+        'hadolint',
+        'yamllint',
+        'jsonlint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -797,7 +810,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         python = { 'isort', 'black', 'ruff' },
         javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
-        golang = { 'gofumpt', 'goimports', 'golangci_lint' },
+        go = { 'gofumpt', 'goimports', 'golangci_lint' },
       },
     },
   },
@@ -944,38 +957,8 @@ require('lazy').setup({
   --   end,
   -- },
 
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('catppuccin').setup {
-        styles = {
-          comments = {},
-          conditionals = {},
-          loops = {},
-          functions = {},
-          keywords = {},
-          strings = {},
-          variables = {},
-          numbers = {},
-          booleans = {},
-          properties = {},
-          types = {},
-          operators = {},
-        },
-      }
-
-      vim.cmd.colorscheme 'catppuccin-mocha'
-    end,
-  },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
-
-  -- Comments code
-  { 'folke/ts-comments.nvim', opts = {}, event = 'VeryLazy', enabled = vim.fn.has 'nvim-0.10.0' == 1 },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
