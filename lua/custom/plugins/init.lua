@@ -67,6 +67,7 @@ return {
       vim.cmd.colorscheme 'gruvbox'
     end,
   },
+  { 'wakatime/vim-wakatime', lazy = false },
   -- {
   --   'catppuccin/nvim',
   --   name = 'catppuccin',
