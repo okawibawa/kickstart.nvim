@@ -681,7 +681,6 @@ require('lazy').setup({
       local servers = {
         -- Go
         gopls = {},
-        golangci_lint_ls = {},
 
         -- Python
         pyright = {},
@@ -744,7 +743,6 @@ require('lazy').setup({
         'eslint_d',
         'gofumpt',
         'goimports',
-        'golangci-lint',
         'black',
         'isort',
         'ruff',
@@ -813,7 +811,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         python = { 'isort', 'black', 'ruff' },
         javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
-        go = { 'gofumpt', 'goimports', 'golangci_lint' },
+        go = { 'gofumpt', 'goimports' },
       },
     },
   },
