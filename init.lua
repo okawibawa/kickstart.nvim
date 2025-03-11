@@ -168,7 +168,10 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 
 -- Close current buffer
-vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Close current buffer' })
+-- vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Close current buffer' })
+vim.keymap.set('n', '<leader>x', function()
+  require('mini.bufremove').delete()
+end, { desc = 'Close current buffer' })
 
 -- Navigate between buffers
 vim.keymap.set('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', { desc = 'Next buffer' })
@@ -979,7 +982,7 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
+      -- Simple and easy statusline
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
