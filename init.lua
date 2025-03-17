@@ -689,6 +689,14 @@ require('lazy').setup({
       local servers = {
         -- Go
         gopls = {},
+        golangci_lint_ls = {
+          cmd = { 'golangci-lint-langserver' },
+          filetypes = { 'go', 'gomod' },
+          root_dir = require('lspconfig.util').root_pattern('.git', 'go.mod'),
+          init_options = {
+            command = { 'golangci-lint', 'run', '--out-format', 'json', '--issues-exit-code=1' },
+          },
+        },
 
         -- Python
         pyright = {},
@@ -712,7 +720,6 @@ require('lazy').setup({
         cssls = {},
         html = {},
         emmet_ls = {},
-        eslint = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -762,6 +769,12 @@ require('lazy').setup({
         'hadolint',
         'yamllint',
         'jsonlint',
+        'eslint_d',
+        'golangci-lint',
+        'vale',
+        'htmlhint',
+        'stylelint',
+        'sqlfluff',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

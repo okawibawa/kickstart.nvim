@@ -5,13 +5,27 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
+
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        -- Web Development
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        html = { 'htmlhint' },
+        css = { 'stylelint' },
+        scss = { 'stylelint' },
+        less = { 'stylelint' },
+
+        -- Backend Development
+        -- go = { 'golangcilint' }, -- golangcilint is being handled by the LSP
+        python = { 'ruff' },
+        sql = { 'sqlfluff' },
         dockerfile = { 'hadolint' },
         yaml = { 'yamllint' },
         json = { 'jsonlint' },
-        javascript = { 'eslint' },
-        typescript = { 'eslint' },
+
+        -- General
+        markdown = { 'markdownlint' },
+        sh = { 'shellcheck' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
