@@ -708,11 +708,11 @@ require('lazy').setup({
 
         -- JS, TS, React Ecosystem
         ts_ls = {},
-        eslint_d = {},
         tailwindcss = {},
         cssls = {},
         html = {},
         emmet_ls = {},
+        eslint = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -748,7 +748,6 @@ require('lazy').setup({
         'stylua',
         'prettier',
         'prettierd',
-        'eslint_d',
         'gofumpt',
         'goimports',
         'black',
@@ -818,10 +817,10 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'isort', 'black', 'ruff' },
-        javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
-        typescript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
-        javascriptreact = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
-        typescriptreact = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         go = { 'gofumpt', 'goimports' },
       },
     },
