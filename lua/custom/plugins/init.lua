@@ -3,6 +3,17 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+
+      'nvim-telescope/telescope.nvim',
+    },
+    config = true,
+  },
+  { 'echasnovski/mini.indentscope', opts = {}, version = false },
   { 'folke/ts-comments.nvim', opts = {}, event = 'VeryLazy', enabled = vim.fn.has 'nvim-0.10.0' == 1 },
   {
     'akinsho/bufferline.nvim',
