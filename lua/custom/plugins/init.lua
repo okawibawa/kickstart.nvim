@@ -11,7 +11,9 @@ return {
 
       'nvim-telescope/telescope.nvim',
     },
-    config = true,
+    config = function()
+      vim.keymap.set('n', '<leader>ng', ':Neogit<CR>', { desc = 'Open Neogit ' })
+    end,
   },
   { 'echasnovski/mini.indentscope', opts = {}, version = false },
   { 'folke/ts-comments.nvim', opts = {}, event = 'VeryLazy', enabled = vim.fn.has 'nvim-0.10.0' == 1 },
