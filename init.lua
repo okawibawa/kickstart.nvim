@@ -719,6 +719,7 @@ require('lazy').setup({
         cssls = {},
         html = {},
         emmet_ls = {},
+        astro = {},
 
         lua_ls = {
           -- cmd = { ... },
