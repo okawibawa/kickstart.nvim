@@ -109,8 +109,8 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+-- vim.opt.tabstop = 4
+-- vim.opt.shiftwidth = 4
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -274,15 +274,20 @@ require('lazy').setup({
   -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
+    config = function()
+      require('gitsigns').setup {
+        signs = {
+          add = { text = '+' },
+          change = { text = '~' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '~' },
+        },
+      }
+
+      vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { desc = 'Preview git hunks' })
+      vim.keymap.set('n', '<leader>gt', ':Gitsigns toggle_current_line_blame<CR>', { desc = 'Toggle git line blame' })
+    end,
   },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -683,6 +688,14 @@ require('lazy').setup({
       local servers = {
         -- Go
         gopls = {},
+        golangci_lint_ls = {
+          cmd = { 'golangci-lint-langserver' },
+          filetypes = { 'go', 'gomod' },
+          root_dir = require('lspconfig.util').root_pattern('.git', 'go.mod'),
+          init_options = {
+            command = { 'golangci-lint', 'run', '--out-format', 'json', '--issues-exit-code=1' },
+          },
+        },
 
         -- Python
         pyright = {},
@@ -702,7 +715,6 @@ require('lazy').setup({
 
         -- JS, TS, React Ecosystem
         ts_ls = {},
-        eslint_d = {},
         tailwindcss = {},
         cssls = {},
         html = {},
@@ -742,7 +754,6 @@ require('lazy').setup({
         'stylua',
         'prettier',
         'prettierd',
-        'eslint_d',
         'gofumpt',
         'goimports',
         'black',
@@ -757,6 +768,12 @@ require('lazy').setup({
         'hadolint',
         'yamllint',
         'jsonlint',
+        'eslint_d',
+        'golangci-lint',
+        'vale',
+        'htmlhint',
+        'stylelint',
+        'sqlfluff',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -812,7 +829,10 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'isort', 'black', 'ruff' },
-        javascript = { 'prettierd', 'prettier', 'eslint_d', stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         go = { 'gofumpt', 'goimports' },
       },
     },
