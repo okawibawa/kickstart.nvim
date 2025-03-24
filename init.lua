@@ -168,7 +168,6 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 
 -- Close current buffer
--- vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Close current buffer' })
 vim.keymap.set('n', '<leader>x', function()
   require('mini.bufremove').delete()
 end, { desc = 'Close current buffer' })
@@ -185,7 +184,7 @@ vim.keymap.set('i', 'jk', '<ESC>', { noremap = true })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -980,7 +979,7 @@ require('lazy').setup({
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline
       --  You could remove this setup call if you don't like it,
