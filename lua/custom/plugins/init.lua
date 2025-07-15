@@ -4,6 +4,12 @@
 -- See the kickstart.nvim README for more information
 return {
   {
+    'nvzone/typr',
+    dependencies = 'nvzone/volt',
+    opts = {},
+    cmd = { 'Typr', 'TyprStats' },
+  },
+  {
     'kawre/leetcode.nvim',
     build = ':TSUpdate html', -- if you have `nvim-treesitter` installed
     dependencies = {
@@ -150,6 +156,47 @@ return {
   },
   { 'wakatime/vim-wakatime', lazy = false },
   -- {
+  --   'rose-pine/neovim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'rose-pine-moon'
+  --   end,
+  -- },
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require('kanagawa').setup {
+  --       compile = false, -- enable compiling the colorscheme
+  --       undercurl = true, -- enable undercurls
+  --       commentStyle = { italic = false },
+  --       functionStyle = {},
+  --       keywordStyle = { italic = false },
+  --       statementStyle = { bold = false },
+  --       typeStyle = {},
+  --       transparent = false, -- do not set background color
+  --       dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+  --       terminalColors = true, -- define vim.g.terminal_color_{0,17}
+  --       colors = { -- add/modify theme and palette colors
+  --         palette = {},
+  --         theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+  --       },
+  --       overrides = function(colors) -- add/modify highlights
+  --         return {}
+  --       end,
+  --       theme = 'wave', -- Load "wave" theme
+  --       background = { -- map the value of 'background' option to a theme
+  --         dark = 'wave', -- try "dragon" !
+  --         light = 'lotus',
+  --       },
+  --     }
+  --
+  --     vim.cmd.colorscheme 'kanagawa'
+  --   end,
+  -- },
+  -- {
   --   'sainnhe/everforest',
   --   lazy = false,
   --   priority = 1000,
@@ -161,63 +208,76 @@ return {
   --     vim.cmd.colorscheme 'everforest'
   --   end,
   -- },
+  -- {
+  --   'ellisonleao/gruvbox.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     require('gruvbox').setup {
+  --       ---@diagnostic disable-next-line: missing-fields
+  --       terminal_colors = true, -- add neovim terminal colors
+  --       undercurl = true,
+  --       underline = true,
+  --       bold = true,
+  --       italic = {
+  --         strings = false,
+  --         emphasis = false,
+  --         comments = false,
+  --         operators = false,
+  --         folds = false,
+  --       },
+  --       strikethrough = true,
+  --       invert_selection = false,
+  --       invert_signs = false,
+  --       invert_tabline = false,
+  --       invert_intend_guides = false,
+  --       inverse = true, -- invert background for search, diffs, statuslines and errors
+  --       contrast = '', -- can be "hard", "soft" or empty string
+  --       palette_overrides = {},
+  --       overrides = {},
+  --       dim_inactive = false,
+  --       transparent_mode = false,
+  --     }
+  --
+  --     vim.cmd.colorscheme 'gruvbox'
+  --   end,
+  -- },
   {
-    'ellisonleao/gruvbox.nvim',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     config = function()
-      require('gruvbox').setup {
-        ---@diagnostic disable-next-line: missing-fields
-        terminal_colors = true, -- add neovim terminal colors
-        undercurl = true,
-        underline = true,
-        bold = true,
-        italic = {
-          strings = false,
-          emphasis = false,
-          comments = false,
-          operators = false,
-          folds = false,
+      ---@diagnostic disable-next-line: missing-fields
+      require('catppuccin').setup {
+        styles = {
+          comments = {},
+          conditionals = {},
+          loops = {},
+          functions = {},
+          keywords = {},
+          strings = {},
+          variables = {},
+          numbers = {},
+          booleans = {},
+          properties = {},
+          types = {},
+          operators = {},
         },
-        strikethrough = true,
-        invert_selection = false,
-        invert_signs = false,
-        invert_tabline = false,
-        invert_intend_guides = false,
-        inverse = true, -- invert background for search, diffs, statuslines and errors
-        contrast = '', -- can be "hard", "soft" or empty string
-        palette_overrides = {},
-        overrides = {},
-        dim_inactive = false,
-        transparent_mode = false,
       }
 
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'catppuccin-mocha'
     end,
   },
   -- {
-  --   'catppuccin/nvim',
-  --   name = 'catppuccin',
-  --   priority = 1000,
+  --   'projekt0n/github-nvim-theme',
+  --   name = 'github-theme',
+  --   lazy = false, -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000, -- make sure to load this before all the other start plugins
   --   config = function()
-  --     ---@diagnostic disable-next-line: missing-fields
-  --     require('catppuccin').setup {
-  --       styles = {
-  --         comments = {},
-  --         conditionals = {},
-  --         loops = {},
-  --         functions = {},
-  --         keywords = {},
-  --         strings = {},
-  --         variables = {},
-  --         numbers = {},
-  --         booleans = {},
-  --         properties = {},
-  --         types = {},
-  --         operators = {},
-  --       },
+  --     require('github-theme').setup {
+  --       -- ...
   --     }
   --
-  --     vim.cmd.colorscheme 'catppuccin-mocha'
+  --     vim.cmd 'colorscheme github_dark_default'
   --   end,
   -- },
 }
